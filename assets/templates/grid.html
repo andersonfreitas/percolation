@@ -1,1 +1,23 @@
-<div class="grid2">gridsdasdasd2</div>
+<h1>Percolation Grid Editor</h1>
+<input id="grid-size" type="number" value="<%=size%>">
+<button id="create">Apply</button>
+<button id="random">Random</button>
+
+<div class="grid">
+  <% for(i = 0; i <= size - 1; i++) { %>
+    <div class="row">
+      <% for(j = 0; j <= size - 1; j++) { %>
+        <%
+          state = "";
+          if (percolation.isOpen(i, j))
+            state = "open";
+          if (percolation.isFull(i, j))
+            state = "full";
+        %>
+        <div class="site <%= state %>" data-col="<%= j%>" data-row="<%= i%>">
+          <!-- <%= i + "," + j %> -->
+        </div>
+      <% } %>
+    </div>
+  <% } %>
+</div>

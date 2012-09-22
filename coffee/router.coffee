@@ -1,4 +1,4 @@
-define ["app", "modules/site"], (app, Site) ->
+define ["app", "modules/site", "modules/editor"], (app, Site, Editor) ->
 
   # Defining the application router, you can attach sub routers here.
   Router = Backbone.Router.extend
@@ -8,7 +8,7 @@ define ["app", "modules/site"], (app, Site) ->
     index: ->
       list = new Site.Collection()
       app.useLayout("main").setViews
-        ".grid": new Backbone.View(template: "grid")
+        ".editor": new Editor.View()
       .render()
 
   Router

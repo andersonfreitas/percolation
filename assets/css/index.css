@@ -1,1 +1,28 @@
 @import "h5bp.css";
+
+.grid {
+  margin: 20px;
+}
+
+.row .site {
+  display: inline-block;
+  border: 1px solid black;
+  /*margin: -1px -3px 0px -2px;*/
+  margin: -4px -3px;
+  width: 60px;
+  height: 60px;
+
+  color: white;
+  background-color: black;
+
+  font-size: 10px;
+}
+
+.site.open {
+  color: black;
+  background-color: white;
+}
+
+.site.full {
+  background-color: #59aef6;
+}
