@@ -4,9 +4,9 @@
 <button id="random">Random</button>
 
 <div class="grid">
-  <% for(i = 0; i <= size - 1; i++) { %>
+  <% for(i = 0; i < size; i++) { %>
     <div class="row">
-      <% for(j = 0; j <= size - 1; j++) { %>
+      <% for(j = 0; j < size; j++) { %>
         <%
           state = "";
           if (percolation.isOpen(i, j))

@@ -25,7 +25,7 @@ define ->
       @find(p) is @find(q)
 
     union: (p, q) ->
-      console.log "union(#{p}, #{q}) : length: #{@id.length}"
+      # console.log "union(#{p}, #{q}) : length: #{@id.length}"
       i = @find p
       j = @find q
 
