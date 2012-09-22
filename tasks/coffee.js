@@ -18,17 +18,17 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('coffee', 'Compile CoffeeScript files', function() {
     var dest = this.file.dest,
-        options = this.data.options,
-        extension = this.data.extension;
-
+        strip = this.data.strip,
+        options = this.data.options;
+    if ( typeof strip === "string" ) {
+      strip = new RegExp( "^" + grunt.template.process( strip, grunt.config() ).replace( /[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&" ) );
+    }
     grunt.file.expandFiles(this.file.src).forEach(function(filepath) {
-      grunt.helper('coffee', filepath, dest, grunt.utils._.clone(options), extension);
+      grunt.helper('coffee', filepath, dest, strip, options);
     });
 
     if (grunt.task.current.errorCount) {
       return false;
-    } else {
-      return true;
     }
   });
 
@@ -36,35 +36,15 @@ module.exports = function(grunt) {
   // HELPERS
   // ==========================================================================
 
-  grunt.registerHelper('coffee', function(src, destPath, options, extension) {
+  grunt.registerHelper('coffee', function(src, destPath, strip, options) {
     var coffee = require('coffee-script'),
-        js = '';
+        js = '',
+        targetFile = strip ? src.replace(strip, "") : src,
+        targetDir = path.dirname(targetFile),
+        targetFilename = path.basename(targetFile, '.coffee') + '.js',
+        dest = path.join(destPath, targetDir, targetFilename);
 
     options = options || {};
-    extension = typeof extension === "undefined" ? '.js' : extension;
-
-    if( destPath && options.preserve_dirs ){
-      var dirname = path.dirname(src);
-      if ( options.base_path ) {
-        dirname = dirname.replace(new RegExp('^'+options.base_path), '');
-      }
-      destPath = path.join(destPath, dirname);
-    } else if( !destPath ){
-      destPath = path.dirname(src);
-    }
-
-    var dest = path.join(destPath, path.basename(src, '.coffee') + extension);
-
-    // De-dup dest if we have .js.js - see issue #16
-    if (dest.match(/\.js\.js/)) {
-      dest = dest.replace(/\.js\.js/, ".js");
-    }
-
-    if (path.extname(src) === '.js') {
-      grunt.file.copy(src, dest);
-      return true;
-    }
-
     if( options.bare !== false ) {
       options.bare = true;
     }
@@ -72,10 +52,8 @@ module.exports = function(grunt) {
     try {
       js = coffee.compile(grunt.file.read(src), options);
       grunt.file.write(dest, js);
-      return true;
     } catch (e) {
-      grunt.log.error("Error in " + src + ":\n" + e);
-      return false;
+      grunt.log.error("Unable to compile your coffee", e);
     }
   });
 
