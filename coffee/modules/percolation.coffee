@@ -4,12 +4,12 @@ define ["algorithms/union_find"], (UF) ->
     # create N-by-N grid, with all sites blocked
     constructor: (n) ->
       @n = n                         # 5
-      count = (n * n) - 1            # 5*5-1 = 25-1 = 24 = 0..23
+      count = (n * n)                # 5*5 = 25 = 0..24
 
-      @top = count                   # 24
-      @bottom = count + 1            # 25
+      @top = count                   # 25
+      @bottom = count + 1            # 26
 
-      @uf = new UF(count + 2)        # 24 + 2 = 26 = 0..25
+      @uf = new UF(count + 2)        # 25 + 2 = 0..26
 
       @sites = []
       @sites[i] = new Int8Array(n) for i in [0..n-1]
@@ -17,7 +17,7 @@ define ["algorithms/union_find"], (UF) ->
       for i in [0..n - 1]            # 0..4
         @uf.union @top, i
 
-      for i in [count-1 .. count-n]  # 23..19
+      for i in [count-1 .. count-n]  # 24..20
         @uf.union @bottom, i
 
     # open site (row i, column j) if it is not already
@@ -51,8 +51,6 @@ define ["algorithms/union_find"], (UF) ->
 
     # is site (row i, column j) full?
     isFull: (i, j) ->
-      if @isOpen(i, j) and @uf.connected(@top, @n*i+j)
-        console.log @n*i+j
       @isOpen(i, j) and @uf.connected(@top, @n*i+j)
 
     # does the system percolate?
