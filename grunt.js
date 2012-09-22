@@ -37,7 +37,7 @@ module.exports = function(grunt) {
     // remove this, ensure concat is updated accordingly.
     jst: {
       "dist/debug/templates.js": [
-        "app/templates/**/*.html"
+        "assets/templates/**/*.html"
       ]
     },
 
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
     // The concat task depends on this file to exist, so if you decide to
     // remove this, ensure concat is updated accordingly.
     handlebars: {
-      "dist/debug/templates.js": ["app/templates/**/*.html"]
+      "dist/debug/templates.js": ["assets/templates/**/*.html"]
     },
 
     // The concatenate task is used here to merge the almond require/define
@@ -82,21 +82,18 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: '<config:coffee.app.src>',
-      tasks: 'coffee:app'
+      files: '<config:coffee.compile.src>',
+      tasks: 'coffee:compile'
     },
 
     coffee: {
-      app: {
-        // files: {
-        //   "path/to/another.js": ["app/**/*.coffee"]
-        // },
-        src: ['app/**/*.coffee'],
+      compile: {
+        src: ['coffee/**/*.coffee'],
         dest: 'app',
-        // strip: 'coffee/',
+        strip: 'coffee/',
         options: {
-            bare: true,
-            preserve_dirs: true
+          bare: true,
+          preserve_dirs: true
         }
       }
     },
