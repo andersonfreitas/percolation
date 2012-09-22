@@ -11,7 +11,7 @@ define ["app", "modules/percolation", "algorithms/union_find"], (app, Percolatio
       'click #random': 'random'
 
     initialize: ->
-      @size = 3
+      @size = 18
       @createGrid(@size)
 
     onCreate: ->
