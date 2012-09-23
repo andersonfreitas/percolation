@@ -40,10 +40,6 @@ define ["algorithms/union_find"], (UF) ->
 
       @uf.union(as, @top) if i is 0
 
-      for x in [0..n-1]
-        if @isFull(n-1, x)
-          @uf.union((n*(n-1)) + x, @bottom)
-
     # is site (row i, column j) open?
     isOpen: (i, j) ->
       if (0 <= i <= @n-1) and (0 <= j <= @n-1)
@@ -55,6 +51,9 @@ define ["algorithms/union_find"], (UF) ->
 
     # does the system percolate?
     percolades: ->
+      for x in [0..@n-1]
+        if @isFull(@n-1, x)
+          @uf.union((@n*(@n-1)) + x, @bottom)
       @uf.connected @top, @bottom
 
   Percolation
