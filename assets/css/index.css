@@ -26,3 +26,7 @@
 .site.full {
   background-color: #59aef6;
 }
+
+canvas {
+  display: block;
+}
