@@ -1,4 +1,4 @@
-define ["app", "modules/percolation"], (app, Percolation) ->
+define ["app", "algorithms/percolation"], (app, Percolation) ->
 
   PercolationRenderer = app.module()
 

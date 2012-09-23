@@ -1,4 +1,4 @@
-define ["app", "modules/site", "modules/editor", "modules/percolation_renderer"], (app, Site, Editor, PercolationRenderer) ->
+define ["app", "modules/editor", "modules/percolation_renderer"], (app, Editor, PercolationRenderer) ->
 
   # Defining the application router, you can attach sub routers here.
   Router = Backbone.Router.extend
