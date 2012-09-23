@@ -1,4 +1,4 @@
-define ["app", "modules/percolation", "algorithms/union_find"], (app, Percolation, UF) ->
+define ["app", "modules/percolation"], (app, Percolation) ->
 
   Editor = app.module()
 
