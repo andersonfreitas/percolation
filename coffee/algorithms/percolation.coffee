@@ -40,9 +40,9 @@ define ["algorithms/union_find"], (UF) ->
 
       @uf.union(as, @top) if i is 0
 
-      for x in [0..n]
-        if @isOpen(n-1, x) and @isFull(n-1, x)
-          @uf.union(@bottom, x)
+      for x in [0..n-1]
+        if @isFull(n-1, x)
+          @uf.union((n*(n-1)) + x, @bottom)
 
     # is site (row i, column j) open?
     isOpen: (i, j) ->
