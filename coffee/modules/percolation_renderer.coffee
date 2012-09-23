@@ -35,7 +35,7 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
       @percolation = new Percolation(@size)
       for n in [0.. Math.round(Math.random()*10000000%@size*@size-1)]
         @percolation.open(Math.abs(Math.round(Math.random()*10000000%(@size-1))), Math.abs(Math.round(Math.random()*10000000%(@size-1))))
-      @render()
+      @draw()
 
     getContext: ->
       @canvas.width = 600
@@ -80,6 +80,7 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
 
       @ctx.font = "normal 36px Verdana";
       @ctx.fillStyle = "yellow"
+
       if @percolation.percolades()
         @ctx.fillText "percolates", 100, 100
       else

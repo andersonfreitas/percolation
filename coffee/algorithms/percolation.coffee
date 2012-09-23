@@ -38,7 +38,7 @@ define ["algorithms/union_find"], (UF) ->
       @uf.union(as, bs) if @isOpen rb, j
       @uf.union(as, ls) if @isOpen i, lc
 
-      @uf.union(as, @top) if i == 0
+      @uf.union(as, @top) if i is 0
 
       for x in [0..n]
         if @isOpen(n-1, x) and @isFull(n-1, x)
