@@ -78,6 +78,13 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
 
           @ctx.fillRect(x, y, w, h)
 
+      @ctx.font = "normal 36px Verdana";
+      @ctx.fillStyle = "yellow"
+      if @percolation.percolades()
+        @ctx.fillText "percolates", 100, 100
+      else
+        @ctx.fillText "does not percolates", 100, 100
+
     afterRender: ->
       @canvas = @$('#grid')[0]
       @getContext()
