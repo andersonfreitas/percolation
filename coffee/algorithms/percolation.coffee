@@ -14,12 +14,6 @@ define ["algorithms/union_find"], (UF) ->
       @sites = []
       @sites[i] = new Int8Array(n) for i in [0..n-1]
 
-      for i in [0..n - 1]            # 0..4
-        @uf.union @top, i
-
-      for i in [count-1 .. count-n]  # 24..20
-        @uf.union @bottom, i
-
     # open site (row i, column j) if it is not already
     open: (i, j) ->
       console.log "open(#{i}, #{j}), #{@n*i+j}"
@@ -43,6 +37,12 @@ define ["algorithms/union_find"], (UF) ->
       @uf.union(as, rs) if @isOpen i, rc
       @uf.union(as, bs) if @isOpen rb, j
       @uf.union(as, ls) if @isOpen i, lc
+
+      @uf.union(as, @top) if i == 0
+
+      for x in [0..n]
+        if @isOpen(n-1, x) and @isFull(n-1, x)
+          @uf.union(@bottom, x)
 
     # is site (row i, column j) open?
     isOpen: (i, j) ->
