@@ -15,8 +15,8 @@ define ["algorithms/union_find"], (UF) ->
       @sites[i] = new Int8Array(n) for i in [0..n-1]
 
     # open site (row i, column j) if it is not already
+    # TODO: i and j should be > 0
     open: (i, j) ->
-      console.log "open(#{i}, #{j}), #{@n*i+j}"
       return false if @isOpen(i, j)
 
       @sites[i][j] = 1
