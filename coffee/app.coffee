@@ -14,6 +14,7 @@ define ["jquery", "lodash", "backbone", "plugins/backbone.layoutmanager"], ($, _
 
   # Configure LayoutManager with Backbone Boilerplate defaults.
   Backbone.LayoutManager.configure
+    manage: true
     paths:
       layout: "assets/templates/layouts/"
       template: "assets/templates/"
