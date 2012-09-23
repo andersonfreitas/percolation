@@ -6,7 +6,6 @@ define ["app", "modules/site", "modules/editor"], (app, Site, Editor) ->
       "": "index"
 
     index: ->
-      list = new Site.Collection()
       app.useLayout("main").setViews
         ".editor": new Editor.View()
       .render()

@@ -22,7 +22,7 @@ define ["app", "modules/percolation"], (app, Percolation) ->
     createGrid: (size) ->
       @percolation = new Percolation(size)
 
-    openSite: (e, x) ->
+    openSite: (e) ->
       site = $(e.currentTarget)
 
       @percolation.open(site.data('row'), site.data('col'))
