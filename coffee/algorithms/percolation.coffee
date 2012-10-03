@@ -11,8 +11,7 @@ define ["algorithms/union_find"], (UF) ->
 
       @uf = new UF(count + 2)        # 25 + 2 = 0..26
 
-      @sites = []
-      @sites[i] = new Int8Array(n) for i in [0..n-1]
+      @sites = (new Int32Array(n) for [0..n-1])
 
     # open site (row i, column j) if it is not already
     # TODO: i and j should be > 0
@@ -51,7 +50,7 @@ define ["algorithms/union_find"], (UF) ->
 
     # does the system percolate?
     percolades: ->
-      for x in [0..@n-1]
+      for x in [0..@n-1] by 1
         if @isFull(@n-1, x)
           @uf.union((@n*(@n-1)) + x, @bottom)
       @uf.connected @top, @bottom
