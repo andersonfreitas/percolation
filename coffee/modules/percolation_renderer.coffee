@@ -25,17 +25,22 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
       @size = 50
       @createGrid(@size)
 
-      gui = new dat.GUI()
-      gui.add(this, 'random')
-      gui.add(this, 'draw')
-      gui.add(this, 'onCreate')
-      gui.add(this, 'size', 2, 600)
-      fillColorHandler = gui.addColor(this, 'fillColor')
+      @gui = new dat.GUI('width': 260, autoPlace: false)
+      @gui.add(this, 'random')
+      @gui.add(this, 'reset')
+
+      sizeHandler = @gui.add(this, 'size', 2, 600)
+      sizeHandler.onChange (value) =>
+        if (@size = Math.round(@size)) % 2 == 1
+          @size += 1
+        @reset()
+
+      fillColorHandler = @gui.addColor(this, 'fillColor')
       fillColorHandler.onChange (value) =>
         @draw()
 
 
-    onCreate: ->
+    reset: ->
       @createGrid(@size)
       @draw()
 
