@@ -1,32 +1,26 @@
 @import "h5bp.css";
 
-.grid {
-  margin: 20px;
+html, body {
+  background-color: #EBE5DD;
+  height: 100%;
 }
 
-.row .site {
-  display: inline-block;
-  border: 1px solid black;
-  /*margin: -1px -3px 0px -2px;*/
-  margin: -4px -3px;
-  width: 30px;
-  height: 30px;
-
-  color: white;
-  background-color: black;
-
-  font-size: 10px;
+#main {
+  margin: 0 auto;
+  height: 100%;
+  display: table;
 }
 
-.site.open {
-  color: black;
-  background-color: white;
-}
-
-.site.full {
-  background-color: #59aef6;
+#layout {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 canvas {
-  display: block;
+  border: 1px solid #2B2B2B;
+  float: right;
+}
+
+.dg {
+  float: right;
 }
