@@ -8,10 +8,7 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
     fillColor: '#59aef6'
 
     events:
-      'click #create': 'onCreate'
-      'click #random': 'random'
       'click #grid': 'openSite'
-
       'mousedown #grid': 'startDraw'
       'mousemove #grid': 'drawSite'
       'mouseup #grid': 'endDraw'
