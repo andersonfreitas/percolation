@@ -5,6 +5,8 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
   PercolationRenderer.View = Backbone.View.extend
     template: 'canvas'
 
+    fillColor: '#59aef6'
+
     events:
       'click #create': 'onCreate'
       'click #random': 'random'
@@ -26,8 +28,17 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
       @size = 50
       @createGrid(@size)
 
+      gui = new dat.GUI()
+      gui.add(this, 'random')
+      gui.add(this, 'draw')
+      gui.add(this, 'onCreate')
+      gui.add(this, 'size', 2, 600)
+      fillColorHandler = gui.addColor(this, 'fillColor')
+      fillColorHandler.onChange (value) =>
+        @draw()
+
+
     onCreate: ->
-      @size = @$('#grid-size').val()
       @createGrid(@size)
       @draw()
 
@@ -74,7 +85,7 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
           if @percolation.isOpen(i, j)
             @ctx.fillStyle = "white"
           if @percolation.isFull(i, j)
-            @ctx.fillStyle = "#59aef6"
+            @ctx.fillStyle = @fillColor
 
           @ctx.fillRect(x, y, w, h)
 

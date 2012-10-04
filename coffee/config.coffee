@@ -13,6 +13,7 @@ require.config
     jquery: "../assets/js/libs/jquery"
     lodash: "../assets/js/libs/lodash"
     backbone: "../assets/js/libs/backbone"
+    dat: "../assets/js/libs/dat.gui.min"
 
   shim:
     backbone:

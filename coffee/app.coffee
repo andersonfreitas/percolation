@@ -1,7 +1,7 @@
 # Libraries.
 
 # Plugins.
-define ["jquery", "lodash", "backbone", "plugins/backbone.layoutmanager"], ($, _, Backbone) ->
+define ["jquery", "lodash", "backbone", "dat", "plugins/backbone.layoutmanager"], ($, _, Backbone) ->
 
   # Provide a global location to place configuration settings and module
   # creation.
