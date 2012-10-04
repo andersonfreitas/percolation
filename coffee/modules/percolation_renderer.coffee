@@ -83,7 +83,7 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
           x = j * w
           y = i * h
 
-          @ctx.fillStyle = "black"
+          @ctx.fillStyle = "#191919"
           if @percolation.isOpen(i, j)
             @ctx.fillStyle = "white"
           if @percolation.isFull(i, j)
@@ -100,6 +100,8 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
         @ctx.fillText "does not percolates", 100, 100
 
     afterRender: ->
+      @el.appendChild(@gui.domElement)
+      @$('.close-button').remove()
       @canvas = @$('#grid')[0]
       @getContext()
       @draw()
