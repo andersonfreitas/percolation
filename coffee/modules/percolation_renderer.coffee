@@ -33,6 +33,8 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
 
       @gui = new dat.GUI('width': 260, autoPlace: false)
       @gui.add(this, 'random')
+      @gui.add(this, 'randomize', 0, 1).onChange =>
+        @random()
       @gui.add(this, 'reset')
 
       sizeHandler = @gui.add(this, 'size', 2, 600)
