@@ -113,9 +113,9 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
       @ctx.fillStyle = "yellow"
 
       if @percolation.percolades()
-        @ctx.fillText "percolates", 100, 100
+        @status = 'percolates'
       else
-        @ctx.fillText "does not percolates", 100, 100
+        @status = 'does not percolate'
 
     afterRender: ->
       @el.appendChild(@gui.domElement)
