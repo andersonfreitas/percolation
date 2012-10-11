@@ -8,8 +8,9 @@ define ->
       @id = new Int32Array(n)
       @sz = new Int32Array(n)
 
-      @sz[i] = i for i in [0..n]
-      @id[i] = i for i in [0..n]
+      for i in [0..n] by 1
+        @id[i] = i
+        @sz[i] = 1
 
       this
 
