@@ -1,15 +1,21 @@
-define ["algorithms/union_find"], (UF) ->
+define ["algorithms/union_find", "algorithms/quick_union"], (UF, QuickUnion) ->
 
   class Percolation
     # create N-by-N grid, with all sites blocked
-    constructor: (n) ->
+    constructor: (n, ds = 'UF') ->
       @n = n                         # 5
       count = (n * n)                # 5*5 = 25 = 0..24
 
       @top = count                   # 25
       @bottom = count + 1            # 26
 
-      @uf = new UF(count + 2)        # 25 + 2 = 0..26
+      capacity = count + 2           # 25 + 2 = 0..26
+
+      if ds is 'QU'
+        @ds = new QuickUnion(capacity)
+      # else if ds is 'WQU'
+      else
+        @ds = new UF(capacity)
 
       @sites = (new Int32Array(n) for [0..n-1])
 
@@ -32,12 +38,12 @@ define ["algorithms/union_find"], (UF) ->
       bs = n * rb + j   # site bellow
       ls = n * i  + lc  # left site
 
-      @uf.union(as, ts) if @isOpen ra, j
-      @uf.union(as, rs) if @isOpen i, rc
-      @uf.union(as, bs) if @isOpen rb, j
-      @uf.union(as, ls) if @isOpen i, lc
+      @ds.union(as, ts) if @isOpen ra, j
+      @ds.union(as, rs) if @isOpen i, rc
+      @ds.union(as, bs) if @isOpen rb, j
+      @ds.union(as, ls) if @isOpen i, lc
 
-      @uf.union(as, @top) if i is 0
+      @ds.union(as, @top) if i is 0
 
     # is site (row i, column j) open?
     isOpen: (i, j) ->
@@ -46,13 +52,13 @@ define ["algorithms/union_find"], (UF) ->
 
     # is site (row i, column j) full?
     isFull: (i, j) ->
-      @isOpen(i, j) and @uf.connected(@top, @n*i+j)
+      @isOpen(i, j) and @ds.connected(@top, @n*i+j)
 
     # does the system percolate?
     percolades: ->
       for x in [0..@n-1] by 1
         if @isFull(@n-1, x)
-          @uf.union((@n*(@n-1)) + x, @bottom)
-      @uf.connected @top, @bottom
+          @ds.union((@n*(@n-1)) + x, @bottom)
+      @ds.connected @top, @bottom
 
   Percolation

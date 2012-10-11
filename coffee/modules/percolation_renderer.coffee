@@ -7,6 +7,12 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
 
     fillColor: '#59aef6'
 
+    algorithm: 'UF'
+
+    randomize: Math.random()
+
+    status: 'not initialized'
+
     events:
       'click #grid': 'openSite'
       'mousedown #grid': 'startDraw'
@@ -39,13 +45,25 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
       fillColorHandler.onChange (value) =>
         @draw()
 
+      algorithmHandler = @gui.add(this, 'algorithm', { 'Union-find': 'UF', 'Quick-union': 'QU', 'Weighted quick-union': 'WQU' } )
+      algorithmHandler.onChange (value) =>
+        console.time('switch')
+        old = @percolation
+        @createGrid(@size)
+        for i in [0 .. @size]
+          for j in [0 .. @size]
+            @percolation.open(i, j) if old.isOpen(i, j)
+        @draw()
+        console.timeEnd('switch')
+
+      x = @gui.add(this, 'status').listen()
 
     reset: ->
       @createGrid(@size)
       @draw()
 
     random: ->
-      @percolation = new Percolation(@size)
+      @createGrid(@size)
       for n in [0.. Math.round(Math.random()*10000000%@size*@size-1)]
         @percolation.open(Math.abs(Math.round(Math.random()*10000000%(@size-1))), Math.abs(Math.round(Math.random()*10000000%(@size-1))))
       @draw()
@@ -59,7 +77,7 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
       @ctx.clearRect(0, 0, @canvas.width, @canvas.height)
 
     createGrid: (size) ->
-      @percolation = new Percolation(size)
+      @percolation = new Percolation(size, @algorithm)
 
     serialize: ->
       size: @size
