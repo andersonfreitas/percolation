@@ -2,7 +2,7 @@ define ["algorithms/union_find", "algorithms/quick_union"], (UF, QuickUnion) ->
 
   class Percolation
     # create N-by-N grid, with all sites blocked
-    constructor: (n) ->
+    constructor: (n, ds) ->
       @n = n                         # 5
       count = (n * n)                # 5*5 = 25 = 0..24
 
