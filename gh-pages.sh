@@ -10,7 +10,7 @@ cd "$(dirname $0)";
 parent_sha=$(git show-ref -s refs/heads/gh-pages)
 
 # get the sha from dist folder
-doc_sha=$(git ls-tree -d HEAD dist | awk '{print $3}')
+doc_sha=$(git ls-tree -d HEAD gh-pages | awk '{print $3}')
 
 #
 new_commit=$(echo "Auto-updating gh-pages." | git commit-tree $doc_sha -p $parent_sha)
