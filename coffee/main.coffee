@@ -10,7 +10,7 @@ require ["app", "router"], (app, Router) ->
   # Trigger the initial route and enable HTML5 History API support, set the
   # root folder to '/' by default.  Change in app.js.
   Backbone.history.start
-    pushState: true
+    pushState: false
     root: app.root
 
 
