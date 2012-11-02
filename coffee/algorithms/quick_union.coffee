@@ -9,7 +9,7 @@ define ->
 
       @id[i] = i for i in [0..n]
 
-      this
+      return this
 
     find: (p) ->
       if p < 0 or p >= @id.length then throw new Exception("Out of bounds")

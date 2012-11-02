@@ -12,7 +12,7 @@ define ->
         @id[i] = i
         @sz[i] = 1
 
-      this
+      return this
 
     find: (p) ->
       # console.log "find(#{p})"

@@ -58,7 +58,7 @@ define ["app", "algorithms/percolation"], (app, Percolation) ->
         @draw()
         console.timeEnd('switch')
 
-      x = @gui.add(this, 'status').listen()
+      @gui.add(this, 'status').listen()
 
     reset: ->
       @createGrid(@size)
