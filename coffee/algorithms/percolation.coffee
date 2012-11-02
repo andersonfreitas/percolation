@@ -17,7 +17,7 @@ define ["algorithms/union_find", "algorithms/quick_union"], (UF, QuickUnion) ->
       else
         @ds = new UF(capacity)
 
-      @sites = (new Int32Array(n) for [0..n-1])
+      @sites = (new Uint32Array(n) for [0..n-1])
 
     # open site (row i, column j) if it is not already
     # TODO: i and j should be > 0

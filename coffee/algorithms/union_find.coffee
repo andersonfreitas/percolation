@@ -5,8 +5,8 @@ define ->
       if n < 0 then throw new Exception("Illegal")
 
       @count = n
-      @id = new Int32Array(n)
-      @sz = new Int32Array(n)
+      @id = new Uint32Array(n)
+      @sz = new Uint32Array(n)
 
       for i in [0..n] by 1
         @id[i] = i
